@@ -1,3 +1,7 @@
 p {
   style: Bold
 }
+
+a:hover {
+  color: red;
+}
