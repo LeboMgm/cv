@@ -53,15 +53,43 @@
     </table>
     <br>
     <hr>
-    <form action="mailto:mancaveeatdrink@gmail.com" method="post" enctype="text/plain">
-      <label>Your Name:</label>
-      <input type="text" name="yourName" value=""><br>
-      <label>Your Email:</label>
-      <input type="text" name="yourEmail" value=""><br>
-      <label>Your Massage:</label><br>
-      <textarea name="yourMassage" rows="10" cols="40"></textarea><br>
-      <input type="submit" name="">
+    <form id="contactForm">
+      <label>Name:</label>
+      <input type="text" id="name" required>
+
+      <label>Email:</label>
+      <input type="email" id="email" required>
+
+      <label>Message:</label>
+      <textarea id="message" required></textarea>
+
+      <button type="submit">Send</button>
     </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init(service_hwf6vlh); // from EmailJS dashboard
+  })();
+
+  document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const templateParams = {
+      name: document.getElementById("name").value,
+      email: document.getElementById("email").value,
+      message: document.getElementById("message").value
+    };
+
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+      .then(function(response) {
+         alert("Message sent successfully!");
+      }, function(error) {
+         alert("Failed to send message: " + JSON.stringify(error));
+      });
+  });
+</script>
+
   </body>
 </html>
 
